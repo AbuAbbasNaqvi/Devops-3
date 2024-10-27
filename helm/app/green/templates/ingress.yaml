@@ -1,0 +1,22 @@
+# Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.appName }}-ingress
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "{{ .Values.canary.enabled }}"
+    nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.canary.weight }}"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.hostName }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: {{ .Values.appName }}-service
+            port:
+              number: 80
