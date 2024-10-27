@@ -19,7 +19,7 @@ hostName: "app.demo.local"
 
 canary:
   enabled: "true"
-  weight: "50"
+  weight: "25"
 
 kibanaService: "kibana-service:5601"
 esService: "es-master-service:9200"
